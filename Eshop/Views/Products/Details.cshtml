@@ -1,0 +1,392 @@
+﻿@model Eshop.Models.Product
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="site-header header-2 mb--20 d-none d-lg-block">
+    <div class="header-middle pt--10 pb--10 ">
+        <div class="container ">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <a href="~/" class="site-brand">
+                        <img src="~/public/images/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-5">
+                    <div class="header-search-block">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="~/tim-kiem/">
+                            <input type="search" name="keyw" placeholder="Tìm kiếm sách, tác giả...">
+                            <button>Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="main-navigation flex-lg-right">
+                        <div class="cart-widget">
+                            @if (ViewBag.username == null)
+                            {
+                                <div class="login-block">
+                                    <a asp-action="Login" asp-controller="Accounts" class="font-weight-bold">Đăng nhập</a> <br>
+                                    <span>or</span><a asp-action="Register" asp-controller="Accounts">Đăng kí</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="login-block">
+                                    <a asp-action="Login" asp-controller="Accounts" class="font-weight-bold"><span> Hi:</span><span id="unameSess"> @ViewBag.username</span></a> <br>
+                                    <a asp-action="Edit" asp-controller="Accounts">Xem Thông tin</a>
+                                </div>
+                            }
+                            <div class="cart-block">
+                                <div class="cart-total">
+                                    <span id="CountCart" class="text-number">
+                                        @*@Model.Count()*@
+                                    </span>
+                                    <span class="text-item">
+                                        Giỏ hàng
+                                    </span>
+                                    <span class="price">
+                                        <span id="totalCart">
+                                            ^-^
+                                        </span>  <i class="fas fa-chevron-down"></i>
+                                    </span>
+                                </div>
+                                <div class="cart-dropdown-block" id="cardheaderAppenIemId">
+                                    @*@foreach (var item in Model)
+                                        {
+                                            <div class="single-cart-block" id="cartheaderItem_@item.product.ID">
+                                                <div class="cart-product">
+                                                    <a href="product-details.html" class="image">
+                                                        <img width="50" src="~/public/images/product/@item.product.img" alt="">
+                                                    </a>
+                                                    <div class="content">
+                                                        <h3 class="title">
+                                                            <a href="product-details.html">
+                                                                @item.product.name
+                                                            </a>
+                                                        </h3>
+                                                        <a href="javascript:void(0);" onclick="deleteItem(@item.product.ID)" class="cross-btn"><i class="fas fa-times"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }*@
+                                    <div class=" single-cart-block ">
+                                        <div class="btn-block">
+                                            <a asp-controller="Carts" asp-action="Index" class="btn">
+                                                Xem giỏ hàng <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                            <a href="~/thanh-toan" class="btn btn--primary">
+                                                Thanh toán <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- include('menu.htm') -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:78px;" class="header-bottom bg-primary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3" style="margin-top:11px;">
+                    @*@model IEnumerable<ThuVienVN.Models.Mcategory>*@
+                    <nav class="category-nav white-nav  ">
+                        <div>
+                            <a href="javascript:void(0)" class="category-trigger">
+                                <i class="fa fa-bars"></i>Chọn tủ sách
+                            </a>
+                            <ul class="category-menu">
+                                @*@foreach (var item in Model)
+                                    {
+                                        <li class="cat-item "><a href="~/@item.slug">@item.name</a></li>
+                                    }*@
+                                <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
+                                <li class="cat-item"><a href="#" class="js-expand-hidden-menu">Xem thêm</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+                <div class="col-lg-2 mt--10">
+                    <div class="header-phone color-white">
+                        <div class="icon">
+                            <i class="fas fa-headphones-alt"></i>
+                        </div>
+                        <div class="text">
+                            <p>Hỗ trợ 24/7</p>
+                            <p class="font-weight-bold number"> +84 975 271 384</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="main-navigation flex-lg-right">
+                        <ul class="main-menu menu-right mr--100 mt--10 main-menu--white li-last-0">
+                            <li style="color:whitesmoke; margin-right:20px; font-size:17px;">TRANG CHỦ </li>
+                            <li style="color: whitesmoke; margin-right: 20px; font-size: 17px;">LIÊN HỆ</li>
+                            <li style="color: whitesmoke; font-size: 17px;">SẢN PHẨM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .text-darkk ul li a {
+        color: #1a1717 !important;
+    }
+
+        .text-darkk ul li a:hover {
+            color: #62ab00 !important;
+        }
+</style>
+@{
+    ViewBag.Title = "Trang Chủ";
+    //Layout = "~/Views/Shared/_layoutSite.cshtml";
+}
+<section class="breadcrumb-section bg-white">
+    <h2 class="sr-only">Site Breadcrumb</h2>
+    <div class="container">
+        <div class="breadcrumb-contents">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
+<main class=" inner-page-sec-padding-bottom ">
+    <div class="container">
+        <div class="row mb--60">
+            <div class="col-lg-5 mb--30">
+                <!-- Product Details Slider Big Image-->
+                <div class="product-details-slider sb-slick-slider arrow-type-two" data-slick-setting='{
+              "slidesToShow": 1,
+              "arrows": false,
+              "fade": true,
+              "draggable": false,
+              "swipe": false,
+              "asNavFor": ".product-slider-nav"
+              }'>
+
+                    <div class="single-slide ">
+                        <img class="w-75 ml-5" src="/img/product/@Html.DisplayFor(model => model.Image)" alt="">
+                    </div>
+
+                </div>
+                <!-- Product Details Slider Nav -->
+
+            </div>
+            <div class="col-lg-7 bg-white">
+                <div class="product-details-info pl-lg--30">
+                    <p class="tag-block pt-2">Tags: <a href="#" class="bg-light">@Html.DisplayFor(model => model.ProductTypeId)</a>,, <a href="#" class="bg-light">@Html.DisplayFor(model => model.Author)</a></p>
+                    <h3 class="product-title">@Html.DisplayFor(model => model.Name)</h3>
+                    <ul class="list-unstyled">
+                        <li>Tác giả: <span class="list-value">@Html.DisplayFor(model => model.Author)</span></li>
+                    </ul>
+
+                    <div class="rating-widget">
+                        <div class="rating-block">
+                            <span class="fas fa-star star_on"></span>
+                            <span class="fas fa-star star_on"></span>
+                            <span class="fas fa-star star_on"></span>
+                            <span class="fas fa-star star_on"></span>
+                            <span class="fas fa-star "></span>
+                        </div>
+                        <div class="review-widget">
+                            <a href="#tab-2">(@ViewBag.SumComment Đánh giá)</a> <span>|</span>
+                            <a href="#tab-2">Viết đánh giá</a>
+                        </div>
+                    </div>
+                        <div class="add-to-cart-row pb-5 pt-3">
+                            <form asp-controller="Carts" asp-route-id="@ViewBag.idProduct" asp-action="Add" method="get">
+                            <div class="count-input-block">
+                                <span class="widget-label">Số lượng</span>
+                                <input type="number" min="1" class="form-control text-center" name="quantity" placeholder="1">
+                            </div>
+                            <div class="add-cart-btn">
+                                <button type="submit" id="add_cart"  class="btn btn-danger"><i class="fa fa-cart-plus"></i> Thêm vào giỏ</button>
+                            </div>
+
+                            </form>
+
+                        </div>
+                        <article class="product-details-article">
+                            <h4 class="sr-only">Product Summery</h4>
+                            <p>
+                                Sách tương tự.
+                            </p>
+                        </article>
+
+                        <div class="product-group-block">
+                            <ul class="product-group">
+                            </ul>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="sb-custom-tab review-tab section-padding">
+            <ul class="nav nav-tabs nav-style-2" id="myTab2" role="tablist">
+                <li class="nav-item  bg-light">
+                    <a class="nav-link active  bg-light" id="tab1" data-toggle="tab" href="#tab-1" role="tab"
+                       aria-controls="tab-1" aria-selected="true">
+                        MÔ TẢ
+                    </a>
+                </li>
+                <li class="nav-item bg-light">
+                    <a class="nav-link bg-light" id="tab2" data-toggle="tab" href="#tab-2" role="tab"
+                       aria-controls="tab-2" aria-selected="true">
+                        ĐÁNH GIÁ (@ViewBag.SumComment)
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content space-db--20 bg-white p-3" id="myTabContent">
+                <div class="tab-pane fade show active " id="tab-1" role="tabpanel" aria-labelledby="tab1">
+                    <article class="review-article">
+                        <h1 class="sr-only">Tab Article</h1>
+                        <p>
+                            @Html.Raw(Model.Description)
+                        </p>
+                    </article>
+                </div>
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2">
+                    <div class="review-wrapper">
+                        <h2 class="title-lg mb--20">Có @ViewBag.SumComment bình luận về sản phẩm </h2>
+                        <div class="review-comment mb--20">
+                            <div class="avatar">
+                                <img src="image/icon/author-logo.png" alt="">
+                            </div>
+                            <div class="text">
+                                
+                                @foreach (var c in ViewBag.AccountComment)
+                                   
+                                    {
+                                        <span style="margin-left:80%; margin-top:-30px;"> @c.CreatedAt</span>
+                                        <img style="width:50px;border-radius:50%;" src="/img/avatar/@c.Account.Avatar"/> 
+                                        <h4 style="font-weight:bold;">
+                                            @c.Account.Username
+                                        </h4>
+                                        <p>
+                                            @c.Content
+
+                                        </p>
+                                    }
+    
+                            </div>
+                        </div>
+                        <h2 class="title-lg mb--20 pt--15">ADD A REVIEW</h2>
+                        <div class="rating-row pt-2">
+                            <p class="d-block">Your Rating</p>
+                            <span class="rating-widget-block">
+                                <input type="radio" name="star" id="star1">
+                                <label for="star1"></label>
+                                <input type="radio" name="star" id="star2">
+                                <label for="star2"></label>
+                                <input type="radio" name="star" id="star3">
+                                <label for="star3"></label>
+                                <input type="radio" name="star" id="star4">
+                                <label for="star4"></label>
+                                <input type="radio" name="star" id="star5">
+                                <label for="star5"></label>
+                            </span>
+                            <form asp-action="Create" asp-controller="Comments" >
+                             
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="message">Comment</label>
+                                            <textarea name="Content" id="message" cols="30" rows="10"
+                                                      class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="AccountId" value="@ViewBag.idAccount" />
+                                    <input type="hidden" name="ProductId" value="@Html.DisplayFor(model=>model.Id)"/>
+                                    <div class="col-lg-4">
+                                        <div class="submit-btn">
+                                            <button type="submit" class="btn btn-black">Post Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=================================
+        RELATED PRODUCTS BOOKS
+    ===================================== -->
+    <section class="">
+        <div class="container">
+            <div class="section-title section-title--bordered">
+                <h2>SẢN PHẨM CÙNG LOẠI </h2><span class="badge badge-success">(@Html.DisplayFor(model => model.Name))</span>
+            </div>
+            <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 4,
+                "dots":true
+            }' data-slick-responsive='[
+                {"breakpoint":1200, "settings": {"slidesToShow": 4} },
+                {"breakpoint":992, "settings": {"slidesToShow": 3} },
+                {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                {"breakpoint":480, "settings": {"slidesToShow": 1} }
+            ]'>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+</div>
+</section>
+<ooter class="site-footer pt-3">
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="copyright-heading">
+                Giấy chứng nhận Đăng ký Kinh doanh số 51386165486131 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh cấp ngày 12/03/2020
+            </p>
+            <a href="#" class="payment-block badge-danger">
+                <img src="~/public/images/icon/payment.png" alt="">
+            </a>
+            <p class="copyright-text">
+                Copyright © 2019 <a href="https://www.facebook.com/daoductinh.18112001/" class="author">Chimer</a>. All Right Reserved.
+                <br>
+                Design By <a href="https://www.facebook.com/daoductinh.18112001/" class="author">Chimer</a>
+            </p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('add_cart').onclick = function () {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert(this.responseText);
+                }
+            };
+            xhttp.open("GET", "api/home/1");
+            xhttp.send();
+        }
+
+        document.getElementById('add_cart_fail').onclick = function () {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert(this.responseText);
+                }
+            };
+            xhttp.open("GET", "api/fail/1");
+            xhttp.send();
+        }
+    </script>
+
+
+
+

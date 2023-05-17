@@ -1,0 +1,102 @@
+﻿@model Eshop.Models.Invoice
+
+@{
+    ViewData["Title"] = "Details";
+}
+@Html.Partial("~/Areas/Admin/Views/Shared/_topMenu.cshtml")
+@Html.Partial("~/Areas/Admin/Views/Shared/_leftMenu.cshtml")
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row m-0 bg-light">
+                <div class="col-sm-6 ">
+                    <h1 class="m-0 text-dark">Chi Tiết Hóa Đơn</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Admin/Home/Dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Chi tiết hóa đơn</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <section class="pt-2">
+        <div class="container bg-white p-4 card">
+            <div class="row">
+                <div class="col-md-4">  </div>
+                <div class="col-md-4"> <h3 class="text-center font-weight-bold text-success "> CHI TIẾT HÓA ĐƠN</h3> </div>
+                <div class="col-md-4 ">
+
+                </div>
+            </div>
+            <div class=" row" style="margin-top:50px;">
+                <div class="col-md-6">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Code)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Code)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Account)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Account.Username)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.IssuedDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.IssuedDate)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.ShippingAddress)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ShippingAddress)
+                    </dd>
+                    
+                </div>
+                <div class="col-md-6">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.ShippingPhone)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ShippingPhone)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Total)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Total)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Status)
+                    </dd>
+                </div>
+                <br />
+                <br />
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+
+

@@ -1,0 +1,139 @@
+﻿@model Eshop.Models.Product
+@{
+    ViewBag.Title = "Edit";
+}
+
+@Html.Partial("~/Areas/Admin/Views/Shared/_topMenu.cshtml")
+@Html.Partial("~/Areas/Admin/Views/Shared/_leftMenu.cshtml")
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row m-0 bg-light">
+                <div class="col-sm-6 ">
+                    <h1 class="m-0 text-dark">Cập Nhật Sản Phẩm</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Admin/Home/Dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Cập nhật sản phẩm</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <section class="pt-2">
+        <div class="container bg-white p-4 card">
+            <div class=" row ">
+                <div class="col-md-4">  </div>
+                <div class="col-md-4"> <h3 class="text-center font-weight-bold text-success "> CẬP NHẬT SẢN PHẨM</h3> </div>
+                <div class="col-md-4 ">
+
+                </div>
+            </div>
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div class=" row ">
+                    <div class="col-md-8">
+                        <div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Author" class="control-label"></label>
+                            <input asp-for="Author" class="form-control" />
+                            <span asp-validation-for="Author" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumerOfPages" class="control-label"></label>
+                            <input asp-for="NumerOfPages" class="form-control" />
+                            <span asp-validation-for="NumerOfPages" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Publishing" class="control-label"></label>
+                            <input asp-for="Publishing" class="form-control" />
+                            <span asp-validation-for="Publishing" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SKU" class="control-label"></label>
+                            <input asp-for="SKU" class="form-control" />
+                            <span asp-validation-for="SKU" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Stock" class="control-label"></label>
+                            <input asp-for="Stock" class="form-control" />
+                            <span asp-validation-for="Stock" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductTypeId" class="control-label"></label>
+                            <select asp-for="ProductTypeId" class="form-control" asp-items="ViewBag.ProductTypeId"></select>
+                            <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageFile" class="control-label"></label>
+                            <input type="hidden" asp-for="Image" />
+                            <input asp-for="ImageFile" class="form-control" />
+                            <img id="imgPreview" style=" width: 150px; margin: 20px 20px;" src="~/img/product/@Model.Image" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-sm bg-success text-white"><i class="far fa-save"></i> Lưu</button>
+                                <a href="~/admin/category" class="btn btn-sm bg-danger text-white"><i class="far fa-window-close"></i> Hủy</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span> Có @ViewBag.total sản phẩm cùng loại</span>
+            </form>
+
+        </div>
+    </section>
+
+    @section Script {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+    $(document).ready(function () {
+        $("#ImageFile").on("change", function (event) {
+            var filePath = URL.createObjectURL(event.target.files[0]);
+            $("#imgPreview").attr("src",filePath);
+        })
+    })
+        </script>
+    }
+
+

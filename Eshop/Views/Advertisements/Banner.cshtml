@@ -1,0 +1,28 @@
+﻿<section class="section-margin">
+    <div class="container bg-white p-3">
+        <div class="promo-section-heading">
+            <h2>Ưu Đãi Trong Tháng</h2>
+        </div>
+        <div class="product-slider with-countdown  slider-border-single-row sb-slick-slider" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 3,
+                "dots":true
+                }' data-slick-responsive='[
+                    {"breakpoint":1400, "settings": {"slidesToShow": 4} },
+                    {"breakpoint":992, "settings": {"slidesToShow": 3} },
+                    {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                    {"breakpoint":575, "settings": {"slidesToShow": 2} },
+                    {"breakpoint":490, "settings": {"slidesToShow": 1} }
+                ]'>
+
+            }'>
+            @foreach (var item in ViewBag.Banner)
+            {
+                <img src="/img/advertisement/@item.Image" />
+
+            }
+        </div>
+    </div>
+</section>
+

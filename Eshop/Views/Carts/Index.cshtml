@@ -1,0 +1,288 @@
+﻿@model IEnumerable<Eshop.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+    int i = 1;
+    bool inStock = true;
+}
+<div class="site-header header-2 mb--20 d-none d-lg-block">
+    <div class="header-middle pt--10 pb--10 ">
+        <div class="container ">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <a href="~/" class="site-brand">
+                        <img src="~/public/images/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-5">
+                    <div class="header-search-block">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="~/tim-kiem/">
+                            <input type="search" name="keyw" placeholder="Tìm kiếm sách, tác giả...">
+                            <button>Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="main-navigation flex-lg-right">
+                        <div class="cart-widget">
+                            @if (ViewBag.username == null)
+                            {
+                                <div class="login-block">
+                                    <a asp-action="Login" asp-controller="Accounts" class="font-weight-bold">Đăng nhập</a> <br>
+                                    <span>or</span><a asp-action="Register" asp-controller="Accounts">Đăng kí</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="login-block">
+                                    <a asp-action="Login" asp-controller="Accounts" class="font-weight-bold"><span> Hi:</span><span id="unameSess"> @ViewBag.username</span></a> <br>
+                                    <a asp-action="Edit" asp-controller="Accounts">Xem Thông tin</a>
+                                </div>
+                            }
+                            <div class="cart-block">
+                                <div class="cart-total">
+                                    <span id="CountCart" class="text-number">
+                                        @*@Model.Count()*@
+                                    </span>
+                                    <span class="text-item">
+                                        Giỏ hàng
+                                    </span>
+                                    <span class="price">
+                                        <span id="totalCart">
+                                            ^-^
+                                        </span>  <i class="fas fa-chevron-down"></i>
+                                    </span>
+                                </div>
+                                <div class="cart-dropdown-block" id="cardheaderAppenIemId">
+                                    @*@foreach (var item in Model)
+                                        {
+                                            <div class="single-cart-block" id="cartheaderItem_@item.product.ID">
+                                                <div class="cart-product">
+                                                    <a href="product-details.html" class="image">
+                                                        <img width="50" src="~/public/images/product/@item.product.img" alt="">
+                                                    </a>
+                                                    <div class="content">
+                                                        <h3 class="title">
+                                                            <a href="product-details.html">
+                                                                @item.product.name
+                                                            </a>
+                                                        </h3>
+                                                        <a href="javascript:void(0);" onclick="deleteItem(@item.product.ID)" class="cross-btn"><i class="fas fa-times"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }*@
+                                    <div class=" single-cart-block ">
+                                        <div class="btn-block">
+                                            <a asp-controller="Carts" asp-action="Index" class="btn">
+                                                Xem giỏ hàng <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                            <a href="~/thanh-toan" class="btn btn--primary">
+                                                Thanh toán <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:78px;" class="header-bottom bg-primary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3" style="margin-top:11px;">
+                    <nav class="category-nav white-nav  ">
+                        <div>
+                            <a href="javascript:void(0)" class="category-trigger">
+                                <i class="fa fa-bars"></i>Chọn tủ sách
+                            </a>
+                            <ul class="category-menu">
+                                @*@foreach (var item in Model)
+                                    {
+                                        <li class="cat-item "><a href="~/@item.slug">@item.name</a></li>
+                                    }*@
+                                <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
+                                <li class="cat-item"><a href="#" class="js-expand-hidden-menu">Xem thêm</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+                <div class="col-lg-2 mt--10">
+                    <div class="header-phone color-white">
+                        <div class="icon">
+                            <i class="fas fa-headphones-alt"></i>
+                        </div>
+                        <div class="text">
+                            <p>Hỗ trợ 24/7</p>
+                            <p class="font-weight-bold number"> +84 975 271 384</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="main-navigation flex-lg-right">
+                        <ul class="main-menu menu-right mr--100 mt--10 main-menu--white li-last-0">
+                            <li style="color:whitesmoke; margin-right:20px; font-size:17px;">TRANG CHỦ </li>
+                            <li style="color: whitesmoke; margin-right: 20px; font-size: 17px;">LIÊN HỆ</li>
+                            <li style="color: whitesmoke; font-size: 17px;">SẢN PHẨM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .text-darkk ul li a {
+        color: #1a1717 !important;
+    }
+
+        .text-darkk ul li a:hover {
+            color: #62ab00 !important;
+        }
+</style>
+<section class="breadcrumb-section">
+    <h2 class="sr-only">Site Breadcrumb</h2>
+    <div class="container">
+        <div class="breadcrumb-contents">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Giỏ hàng</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
+<!-- Cart Page Start -->
+<main class="cart-page-main-block inner-page-sec-padding-bottom ">
+    <div class="cart_area cart-area-padding bg-white ">
+        <div class="container">
+            <div class="page-section-title">
+                <h1>Giỏ hàng</h1>
+            </div>
+            <div class="row bg-white">
+                <div class="col-12">
+                    <form action="#" class="">
+                        <!-- Cart Table -->
+                        <div class="cart-table table-responsive mb--40">
+                            <table class="table">
+                                <!-- Head Row -->
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Product.Image)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Product.Name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Quantity)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Product.Price)
+                                        </th>
+                                        <th>Thành tiền</th>
+                                        <th>Chức năng</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <spam class="text-danger"> @ViewBag.statusCart</spam>
+                                    <!-- Product Row -->
+
+
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>
+                                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId"><img src="~/img/product/@item.Product.Image" style="width:100px" /></a>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity) <br />
+                                                @if(item.Product.Stock < item.Quantity)
+                                                        {
+                                                            inStock = false;
+                                                        <span class="text-danger">(Tồn kho: @item.Product.Stock)</span>
+                                                    }
+                                            </td>
+                                            <td>
+                                                @item.Product.Price.ToString("#,##0") VNĐ
+                                            </td>
+                                            <td>
+                                                @((item.Quantity * item.Product.Price).ToString("#,##0"))
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                            <div style="margin-left:60%; margin-top:7%;">
+
+                                <td colspan="6" class="actions">
+                                    <h3 style="font-weight:bold; color:black;">Tổng tiền: <span style="color:red;font-style:italic; text-decoration:auto">@Model.Sum(c => c.Product.Price * c.Quantity).ToString("#,##0") VNĐ</span> </h3> <br />
+                                    @if (inStock)
+                                      {
+                                       <a class="btn btn-success " asp-action="Pay" asp-controller="Carts">Thanh toán</a>
+                                      }
+
+
+                                    @if (!inStock)
+                                        {
+                                       <a class="btn btn-success disabled" asp-action="Pay" asp-controller="Carts">Thanh toán</a>
+
+                                        }
+                                </td>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-section-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-12 mb--30 mb-lg--0">
+                    <!-- slide Block 5 / Normal Slider -->
+                    <div class="cart-block-title">
+                        <h2>Có thể bạn thích</h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="site-footer pt-3">
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="copyright-heading">
+                Giấy chứng nhận Đăng ký Kinh doanh số 51386165486131 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh cấp ngày 12/03/2020
+            </p>
+            <a href="#" class="payment-block badge-danger">
+                <img src="~/public/images/icon/payment.png" alt="">
+            </a>
+            <p class="copyright-text">
+                Copyright © 2019 <a href="https://www.facebook.com/daoductinh.18112001/" class="author">Chimer</a>. All Right Reserved.
+                <br>
+                Design By <a href="https://www.facebook.com/daoductinh.18112001/" class="author">Chimer</a>
+            </p>
+        </div>
+    </div>
+</footer>
+<!-- Cart Page End -->

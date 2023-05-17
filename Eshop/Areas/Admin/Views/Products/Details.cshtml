@@ -1,0 +1,130 @@
+﻿@model Eshop.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+@Html.Partial("~/Areas/Admin/Views/Shared/_topMenu.cshtml")
+@Html.Partial("~/Areas/Admin/Views/Shared/_leftMenu.cshtml")
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row m-0 bg-light">
+                <div class="col-sm-6 ">
+                    <h1 class="m-0 text-dark">Chi Tiết Sản Phẩm</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Admin/Home/Dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <section class="pt-2">
+        <div class="container bg-white p-4 card">
+            <div class=" row ">
+                <div class="col-md-4">  </div>
+                <div class="col-md-4"> <h3 class="text-center font-weight-bold text-success "> CHI TIẾT SẢN PHẨM</h3> </div>
+                <div class="col-md-4 ">
+
+                </div>
+            </div>
+            <div class=" row " style="margin-top:50px;margin-left:40px;">
+                <div class="col-md-4">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+                    <dd class="col-sm-10">
+                        <img width="170px" height="220px" src="/img/product/@Html.DisplayFor(model => model.Image)" alt="Alternate Text" />
+
+                    </dd>
+                   
+
+                </div>
+                <div class="col-md-4">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Author)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Author)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.NumerOfPages)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.NumerOfPages)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Publishing)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Publishing)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Stock)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Stock)
+                    </dd>
+
+                </div>
+                <div class="col-md-4">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.ProductType)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ProductType.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.SKU)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.SKU)
+                    </dd>
+
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Status)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.Raw(Model.Description)
+                    </dd>
+                </div>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+    </section>
+
+
+
+
+

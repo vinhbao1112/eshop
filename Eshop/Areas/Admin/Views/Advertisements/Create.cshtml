@@ -1,0 +1,82 @@
+﻿@model Eshop.Areas.Admin.Models.Advertisement
+
+@{
+    ViewData["Title"] = "Create";
+}
+@Html.Partial("~/Areas/Admin/Views/Shared/_topMenu.cshtml")
+@Html.Partial("~/Areas/Admin/Views/Shared/_leftMenu.cshtml")
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row m-0 bg-light">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thêm Ảnh</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Admin">Home</a></li>
+                        <li class="breadcrumb-item active">Thêm Ảnh</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <hr />
+    <section class="pt-2">
+        <div class="container bg-white p-4 card">
+            <div class="row">
+                <div class="col-md-4">  </div>
+                <div class="col-md-4"> <h3 class="text-center font-weight-bold text-success "> THÊM ẢNH</h3> </div>
+                <div class="col-md-4 ">
+
+                </div>
+            </div>
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="ImageFile" class="control-label"></label>
+                            <input asp-for="ImageFile" class="form-control" />
+                            <img id="imgPreview" style="display: none; width: 200px; margin-top:20px;" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ImageTypeId" class="control-label"></label>
+                            <select asp-for="ImageTypeId" class="form-control" asp-items="ViewBag.ImageTypeId"></select>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-sm bg-success text-white"><i class="far fa-save"></i> Lưu</button>
+                                <a href="~/admin/category" class="btn btn-sm bg-danger text-white"><i class="far fa-window-close"></i> Hủy</a>
+                            </div>
+                        </div>
+                        <div> @(ViewBag.SizeError==null?ViewBag.SizeError:"")</div>
+                    </div>
+                </div> 
+            </form>
+        </div>
+</div>
+@section Script{
+    <script>
+        $(document).ready(function () {
+            $("#ImageFile").on("change", function (event) {
+                var filePath = URL.createObjectURL(event.target.files[0]);
+                $("#imgPreview").show().attr("src", filePath);
+            })
+        })
+    </script>
+}
+
+
+
+
+
